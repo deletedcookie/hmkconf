@@ -132,6 +132,7 @@ export type ConfiguratorTabs =
   | "performance"
   | "advanced-keys"
   | "gamepad"
+  | "lighting"
   | "debug"
   | "settings"
 

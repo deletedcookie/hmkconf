@@ -21,6 +21,7 @@ import {
   PencilIcon,
   SettingsIcon,
   SquareChevronUpIcon,
+  SunIcon,
 } from "@lucide/svelte"
 import type { Component } from "svelte"
 import type { ConfiguratorTabs } from "../context.svelte"
@@ -47,12 +48,9 @@ export const sidebarTabGroups: SidebarTabGroup[] = [
     tabs: [
       { label: "Remap", value: "remap", icon: PencilIcon },
       { label: "Performance", value: "performance", icon: GaugeIcon },
-      {
-        label: "Advanced Keys",
-        value: "advanced-keys",
-        icon: SquareChevronUpIcon,
-      },
+      { label: "Advanced Keys", value: "advanced-keys", icon: SquareChevronUpIcon },
       { label: "Gamepad", value: "gamepad", icon: Gamepad2Icon },
+      { label: "Lighting", value: "lighting", icon: SunIcon },
       { label: "Debug", value: "debug", icon: BugIcon },
     ],
   },

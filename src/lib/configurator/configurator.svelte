@@ -27,6 +27,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
   const performanceTab = import("./performance/performance-tab.svelte")
   const advancedKeysTab = import("./advanced-keys/advanced-keys-tab.svelte")
   const gamepadTab = import("./gamepad/gamepad-tab.svelte")
+  const lightingTab = import("./lighting/performance-tab.svelte")
   const debugTab = import("./debug/debug-tab.svelte")
   const settingsTab = import("./settings/settings-tab.svelte")
 
@@ -68,6 +69,13 @@ this program. If not, see <https://www.gnu.org/licenses/>.
     <Tabs.Content value="gamepad">
       {#snippet child({ props })}
         <GamepadTab {...props} />
+      {/snippet}
+    </Tabs.Content>
+  {/await}
+    {#await lightingTab then { default: LightingTab }}
+    <Tabs.Content value="lighting">
+      {#snippet child({ props })}
+        <LightingTab {...props} />
       {/snippet}
     </Tabs.Content>
   {/await}
