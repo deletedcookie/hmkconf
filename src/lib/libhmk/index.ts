@@ -13,7 +13,7 @@
  * this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { uint16Schema } from "$lib/integer"
+import { uint16Schema, uint8Schema } from "$lib/integer"
 import z from "zod"
 
 export const HMK_FIRMWARE_VERSION = 0x0102
@@ -41,3 +41,12 @@ export const hmkOptionsSchema = z.object({
 })
 
 export type HMK_Options = z.infer<typeof hmkOptionsSchema>
+
+export const hmkLedSchema = z.object({
+  ledBrightness: uint8Schema,
+  ledRed: uint8Schema,
+  ledGreen: uint8Schema,
+  ledBlue: uint8Schema,
+})
+
+export type HMK_Led = z.infer<typeof hmkLedSchema>

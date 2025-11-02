@@ -25,6 +25,10 @@ this program. If not, see <https://www.gnu.org/licenses/>.
   import { setToIntervals } from "$lib/utils"
   import { performanceStateContext } from "../context.svelte"
   import { actuationQueryContext } from "../queries/actuation-query.svelte"
+  import { ledQueryContext } from "../queries/led-query.svelte"
+  import { Button } from "$lib/components/ui/button"
+
+  const ledQuery = $derived(ledQueryContext.get())
 
   const { keys } = $derived(performanceStateContext.get())
 
@@ -85,6 +89,16 @@ this program. If not, see <https://www.gnu.org/licenses/>.
         ? "Rapid Trigger Press Sensitivity"
         : "Rapid Trigger Sensitivity"}
     />
+    <div>
+      <Button
+        onclick={() => ledQuery.set({
+            data: { ledBrightness: 1, ledRed: 2, ledGreen:3, ledBlue: 4 },
+          })}
+        size="sm"
+      >
+        Recalibrate
+      </Button>
+    </div>
     {#if separatedRT}
       <DistanceSlider
         bind:committed={

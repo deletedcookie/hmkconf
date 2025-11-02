@@ -13,7 +13,7 @@
  * this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import type { HMK_Calibration, HMK_Options } from "$lib/libhmk"
+import type { HMK_Calibration, HMK_Options, HMK_Led } from "$lib/libhmk"
 import type { HMK_Actuation } from "$lib/libhmk/actuation"
 import type { HMK_AdvancedKey } from "$lib/libhmk/advanced-keys"
 import type { HMK_AnalogInfo } from "$lib/libhmk/commands"
@@ -26,6 +26,8 @@ type SetParams<T> = { data: T }
 export type SetCalibrationParams = SetParams<HMK_Calibration>
 
 export type SetOptionsParams = SetParams<HMK_Options>
+
+export type SetLedParams = SetParams<HMK_Led>
 
 export type ResetProfileParams = { profile: number }
 export type DuplicateProfileParams = { profile: number; srcProfile: number }
@@ -89,6 +91,8 @@ export type KeyboardAction = {
     params: GetGamepadOptionsParams,
   ): Promise<HMK_GamepadOptions>
   setGamepadOptions(params: SetGamepadOptionsParams): Promise<void>
+  getLedConf(): Promise<HMK_Led>
+  setLedConf(params: SetLedParams): Promise<void>
 }
 
 export type Keyboard = KeyboardState & KeyboardAction
