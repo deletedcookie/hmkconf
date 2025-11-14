@@ -91,8 +91,8 @@ export type KeyboardAction = {
     params: GetGamepadOptionsParams,
   ): Promise<HMK_GamepadOptions>
   setGamepadOptions(params: SetGamepadOptionsParams): Promise<void>
-  getLedConf(): Promise<HMK_Led>
-  setLedConf(params: SetLedParams): Promise<void>
+  getLedConf(params: { profile: number }): Promise<HMK_Led>
+  setLedConf(params: { profile: number; data: HMK_Led }): Promise<void>
 }
 
 export type Keyboard = KeyboardState & KeyboardAction

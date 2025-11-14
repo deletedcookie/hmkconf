@@ -43,7 +43,6 @@ export const hmkOptionsSchema = z.object({
 export type HMK_Options = z.infer<typeof hmkOptionsSchema>
 
 export const hmkLedSchema = z.object({
-  ledBrightness: uint8Schema,
   ledRed: uint8Schema,
   ledGreen: uint8Schema,
   ledBlue: uint8Schema,

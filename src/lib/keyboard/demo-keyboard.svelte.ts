@@ -37,6 +37,7 @@ import type {
   SetGamepadButtonsParams,
   SetGamepadOptionsParams,
   SetKeymapParams,
+  SetLedParams,
   SetOptionsParams,
   SetTickRateParams,
 } from "."
@@ -72,6 +73,7 @@ const defaultProfile: DemoKeyboardProfileState = {
 type DemoKeyboardState = {
   options: HMK_Options
   profiles: DemoKeyboardProfileState[]
+  ledConf: { ledBrightness: number; ledRed: number; ledGreen: number; ledBlue: number }
 }
 
 export class DemoKeyboard implements Keyboard {
@@ -84,6 +86,7 @@ export class DemoKeyboard implements Keyboard {
     profiles: [...Array(numProfiles)].map(() =>
       structuredClone(defaultProfile),
     ),
+    ledConf: { ledBrightness: 255, ledRed: 255, ledGreen: 255, ledBlue: 255 },
   }
 
   async disconnect() {}
@@ -167,5 +170,13 @@ export class DemoKeyboard implements Keyboard {
   }
   async setTickRate({ profile, data }: SetTickRateParams) {
     this.#state.profiles[profile].tickRate = data
+  }
+  async getLedConf({ profile }: { profile: number }) {
+    // demo ignores profile
+    return this.#state.ledConf
+  }
+  async setLedConf({ profile, data }: { profile: number; data: any }) {
+    // demo ignores profile
+    this.#state.ledConf = data
   }
 }

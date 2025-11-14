@@ -31,16 +31,15 @@ export class LedQuery {
   constructor() {
     this.ledConf = resource(
       () => {},
-      () => this.#keyboard.getLedConf(),
+      () => this.#keyboard.getLedConf({ profile: this.#profile }),
     )
   }
-
   async set(params: SetLedParams) {
     const { data } = params
     await optimisticUpdate({
       resource: this.ledConf,
       optimisticFn: () => data,
-      updateFn: () => this.#keyboard.setLedConf(params),
+      updateFn: () => this.#keyboard.setLedConf({ profile: this.#profile, data }),
     })
   }
 }

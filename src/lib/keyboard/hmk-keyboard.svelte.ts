@@ -53,6 +53,10 @@ import {
 } from "$lib/libhmk/commands/profile"
 import { reboot } from "$lib/libhmk/commands/reboot"
 import { getTickRate, setTickRate } from "$lib/libhmk/commands/tick-rate"
+import {
+  getLedConf,
+  setLedConf,
+} from "$lib/libhmk/commands/led-options"
 import { displayVersion, isWebHIDSSupported } from "$lib/utils"
 import { v4 as uuidv4 } from "uuid"
 import type {
@@ -71,6 +75,7 @@ import type {
   SetGamepadButtonsParams,
   SetGamepadOptionsParams,
   SetKeymapParams,
+  SetLedParams,
   SetOptionsParams,
   SetTickRateParams,
 } from "."
@@ -183,6 +188,12 @@ class HMKKeyboard implements Keyboard {
   }
   setGamepadOptions(params: SetGamepadOptionsParams) {
     return setGamepadOptions(this.commander, params)
+  }
+  getLedConf({ profile }: { profile: number }) {
+    return getLedConf(this.commander, { profile })
+  }
+  setLedConf({ profile, data }: { profile: number; data: any }) {
+    return setLedConf(this.commander, { profile, data })
   }
 }
 

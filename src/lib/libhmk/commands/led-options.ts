@@ -14,7 +14,6 @@
  */
 
 import { DataViewReader } from "$lib/data-view-reader"
-import { uint16ToUInt8s } from "$lib/integer"
 import type { SetLedParams } from "$lib/keyboard"
 import type { Commander } from "$lib/keyboard/commander"
 import { HMK_Command } from "."
@@ -23,13 +22,16 @@ import type { HMK_Led } from ".."
 
 export async function getLedConf(
   commander: Commander,
+  { profile }: { profile: number },
 ): Promise<HMK_Led> {
   const reader = new DataViewReader(
-    await commander.sendCommand({ command: HMK_Command.GET_LED_CONF }),
+    await commander.sendCommand({
+      command: HMK_Command.GET_LED_CONF,
+      payload: [profile],
+    }),
   )
 
   return {
-    ledBrightness: reader.uint8(),
     ledRed: reader.uint8(),
     ledGreen: reader.uint8(),
     ledBlue: reader.uint8(),
@@ -38,17 +40,10 @@ export async function getLedConf(
 
 export async function setLedConf(
   commander: Commander,
-  {
-    data: { ledBrightness, ledRed, ledGreen, ledBlue },
-  }: SetLedParams,
+  { profile, data: { ledRed, ledGreen, ledBlue } }: { profile: number; data: HMK_Led },
 ) {
   await commander.sendCommand({
     command: HMK_Command.SET_LED_CONF,
-    payload: [
-      ...uint16ToUInt8s(ledBrightness),
-      ...uint16ToUInt8s(ledRed),
-      ...uint16ToUInt8s(ledGreen),
-      ...uint16ToUInt8s(ledBlue),
-    ],
+    payload: [profile, ledRed, ledGreen, ledBlue],
   })
 }
