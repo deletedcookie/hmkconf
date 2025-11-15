@@ -63,6 +63,18 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 
 </script>
 
+<div
+  class={cn("mx-auto flex size-full max-w-3xl flex-col", className)}
+  {...props}
+>
+  <FixedScrollArea class="flex flex-col gap-4 p-4">
+    <div class="grid shrink-0">
+      <span class="font-semibold">Configure Lighting</span>
+      <span class="text-sm text-muted-foreground">
+        Change the backlight colour here.
+      </span>
+    </div>
+
     <div>
       <input
         bind:this={colorPickerRef}
@@ -71,6 +83,9 @@ this program. If not, see <https://www.gnu.org/licenses/>.
         value="#ff0000"
       />
     </div>
+    
+  </FixedScrollArea>
+</div>
 
 <input
   bind:this={fileRef}
